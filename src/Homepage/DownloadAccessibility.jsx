@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Check } from "lucide-react";
-import { FaGooglePlay, FaApple, FaWindows } from "react-icons/fa";
 
 const platformsData = [
   {
@@ -32,14 +31,14 @@ const platformsData = [
 export default function DownloadAccessibility() {
   const [active, setActive] = useState(0);
 
-  // STYLE FOR GRID BACKGROUND ON CARDS (NO GRADIENT/GLOW)
+  // STYLE FOR GRID BACKGROUND ON CARDS
   const gridCardStyle = {
-    backgroundColor: "#000000", // Pure Black Base
+    backgroundColor: "#000000",
     backgroundImage: `
       linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), 
       linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
     `,
-    backgroundSize: "30px 30px", // Grid box size
+    backgroundSize: "30px 30px",
   };
 
   return (
@@ -73,7 +72,6 @@ export default function DownloadAccessibility() {
               </span>
             </div>
 
-            {/* UPDATED: Mobile text-3xl, Desktop text-5xl */}
             <h2 className="text-3xl md:text-5xl font-bold font-nunito-custom font-heading text-white leading-tight">
               Compete, Trade,
               <br />
@@ -115,7 +113,6 @@ export default function DownloadAccessibility() {
               ))}
             </div>
             
-            {/* UPDATED: Mobile text-sm, Desktop text-lg */}
             <p className="text-slate-400 text-sm md:text-lg leading-relaxed">
               {platformsData[active].info}
             </p>
@@ -124,7 +121,6 @@ export default function DownloadAccessibility() {
               {platformsData[active].features.map((feature, index) => (
                 <li
                   key={index}
-                  // UPDATED: Mobile text-sm
                   className="flex items-center gap-3 text-slate-300 font-medium text-sm md:text-base"
                 >
                   <span className="text-[#50fa7b]">
@@ -146,95 +142,49 @@ export default function DownloadAccessibility() {
         </div>
 
         {/* ====================================================
-            BOTTOM SECTION: GRID CARDS (CLEAN BLACK VERSION)
+            BOTTOM SECTION: GRID CARDS (TEXT ONLY & SHORT)
         ===================================================== */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative z-20">
-          {/* CARD 1: MOBILE USERS */}
+          
+          {/* CARD 1: RISE HIGHER */}
           <div
-            className="rounded-2xl p-6 md:p-10 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300"
+            className="rounded-2xl p-6 md:p-8 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-center h-full min-h-[160px]"
             style={gridCardStyle}
           >
-            {/* UPDATED: Mobile text-xl, Desktop text-2xl */}
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-2 font-moderustic">
+            <h3 className="text-white font-bold text-xl md:text-2xl mb-3 font-moderustic">
               Rise Higher
             </h3>
-            {/* UPDATED: Mobile text-xs, Desktop text-sm */}
-            <p className="text-slate-400 text-xs md:text-sm mb-6 md:mb-8 font-medium">
-              Level up your game and lead the board.
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
+              Compete daily to climb ranks and dominate the leaderboard.
             </p>
-
-            <div className="flex justify-center gap-4">
-              {/* Play Store Button */}
-              <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white hover:bg-zinc-800 transition-colors shadow-lg group">
-                <FaGooglePlay
-                  size={18}
-                  className="text-[#00d66f] group-hover:scale-110 transition-transform md:w-5 md:h-5"
-                />
-                <span className="sr-only">Android</span>
-              </button>
-              {/* App Store Button */}
-              <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white hover:bg-zinc-800 transition-colors shadow-lg group">
-                <FaApple
-                  size={20}
-                  className="group-hover:scale-110 transition-transform md:w-6 md:h-6"
-                />
-                <span className="sr-only">iOS</span>
-              </button>
-            </div>
           </div>
 
-          {/* CARD 2: DESKTOP USERS */}
+          {/* CARD 2: GRAB REWARDS */}
           <div
-            className="rounded-2xl p-6 md:p-10 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300"
+            className="rounded-2xl p-6 md:p-8 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-center h-full min-h-[160px]"
             style={gridCardStyle}
           >
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-2">
+            <h3 className="text-white font-bold text-xl md:text-2xl mb-3">
               Grab Rewards
             </h3>
-            <p className="text-slate-400 text-xs md:text-sm mb-6 md:mb-8 font-medium">
-              Collect exclusive bonuses as you progress.
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
+              Unlock exclusive bonuses and huge prizes as you progress.
             </p>
-
-            <div className="flex justify-center gap-4">
-              {/* Windows Button */}
-              <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white hover:bg-zinc-800 transition-colors shadow-lg group">
-                <FaWindows
-                  size={18}
-                  className="text-[#00a4ef] group-hover:scale-110 transition-transform md:w-5 md:h-5"
-                />
-                <span className="sr-only">Windows</span>
-              </button>
-              {/* Mac Button */}
-              <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white hover:bg-zinc-800 transition-colors shadow-lg group">
-                <FaApple
-                  size={20}
-                  className="group-hover:scale-110 transition-transform md:w-6 md:h-6"
-                />
-                <span className="sr-only">Mac</span>
-              </button>
-            </div>
           </div>
 
-          {/* CARD 3: WEB TERMINAL */}
+          {/* CARD 3: EARN GLORY */}
           <div
-            className="rounded-2xl p-6 md:p-10 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300"
+            className="rounded-2xl p-6 md:p-8 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-center h-full min-h-[160px]"
             style={gridCardStyle}
           >
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-2">
+            <h3 className="text-white font-bold text-xl md:text-2xl mb-3">
               Earn Glory
             </h3>
-            <p className="text-slate-400 text-xs md:text-sm mb-6 md:mb-8 font-medium">
-              Turn your performance into recognition and prizes.
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
+              Gain recognition and showcase your skills to the world.
             </p>
-
-            <div className="flex justify-center">
-              {/* Lime Green Button */}
-              <button className="flex items-center gap-2 bg-[#8ae64c] hover:bg-[#7ad340] text-black font-extrabold text-xs md:text-sm px-6 py-3 md:px-8 md:py-4 rounded-full transition-all shadow-xl hover:shadow-2xl hover:scale-105">
-                Web Platform
-                <span className="ml-1 text-[10px]">▶</span>
-              </button>
-            </div>
           </div>
+
         </div>
       </div>
     </section>
