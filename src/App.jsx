@@ -14,7 +14,6 @@ import Signup from "./Components/Signup";
 import Freedemo from "./Components/Freedemo";
 import Quickstart from "./Components/Quickstart";
 import Education from "./Components/Education";
-import Tradinginstruments from "./WhyMax/tradinginstruments";
 import PromoBonuses from "./WhyMax/PromoBonuses";
 import SocialTrading from "./WhyMax/SocialTrading";
 import AbouttheCompany from "./Aboutus/AbouttheCompany";
@@ -29,6 +28,7 @@ import Paymentpolicy from "./Aboutus/Paymentpolicy";
 import Informationdisclosure from "./Aboutus/Informationdisclosure";
 import RiskStatement from "./Aboutus/RiskStatement";
 import RefundPolicy from "./Aboutus/RefundPolicy.JSX";
+import Tradinginstruments from "./WhyMax/Tradinginstruments";
 
 function MainLayout() {
   const location = useLocation();
