@@ -27,8 +27,9 @@ import Privacypolicy from "./Aboutus/Privacypolicy";
 import Paymentpolicy from "./Aboutus/Paymentpolicy";
 import Informationdisclosure from "./Aboutus/Informationdisclosure";
 import RiskStatement from "./Aboutus/RiskStatement";
-import RefundPolicy from "./Aboutus/RefundPolicy.JSX";
+
 import Tradinginstruments from "./WhyMax/Tradinginstruments";
+import RefundPolicy from "./Aboutus/RefundPolicy";
 
 function MainLayout() {
   const location = useLocation();
