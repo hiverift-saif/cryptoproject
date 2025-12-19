@@ -218,7 +218,7 @@ const Navbar = ({ onOpenAuth }) => {
 
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
-      <style jsx global>{`
+      <style >{`
         body { top: 0px !important; }
         .goog-te-banner-frame, .goog-tooltip { display: none !important; }
         .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
