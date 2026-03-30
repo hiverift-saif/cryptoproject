@@ -263,26 +263,34 @@ const TradeMarkets = () => {
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 mt-8 sm:mt-16 md:mt-20">
-          {[
-            { icon: Zap, title: 'Instant Execution', desc: 'Trade in milliseconds', color: 'from-yellow-500 to-orange-500' },
-            { icon: Activity, title: 'Real-Time Data', desc: 'Live prices updated every second', color: 'from-green-500 to-emerald-500' },
-            { icon: Sparkles, title: 'Zero Fees', desc: 'No hidden charges or commissions', color: 'from-blue-500 to-purple-500' }
-          ].map((feature, i) => (
-            <div
-              key={i}
-              className="p-4 sm:p-6 bg-white/[0.02] backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 group"
-            >
-              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-              </div>
-              {/* UPDATED: Mobile text-sm */}
-              <h3 className="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2">{feature.title}</h3>
-              {/* UPDATED: Mobile text-xs */}
-              <p className="text-xs sm:text-sm text-gray-400">{feature.desc}</p>
-            </div>
-          ))}
-        </div>
+     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mt-8 sm:mt-16 md:mt-20">
+  {[
+    { icon: Zap, title: 'Instant Execution', desc: 'Trade in milliseconds', color: 'from-yellow-500 to-orange-500' },
+    { icon: Activity, title: 'Real-Time Data', desc: 'Live prices updated every second', color: 'from-green-500 to-emerald-500' },
+    { icon: Sparkles, title: 'Zero Fees', desc: 'No hidden charges or commissions', color: 'from-blue-500 to-purple-500' },
+    { icon: TrendingUp, title: 'Up 95% Gain 📈', desc: 'Earn up to 95% profit on successful trades', color: 'from-green-500 to-emerald-500' }
+  ].map((feature, i) => (
+    <div
+      key={i}
+      className="p-4 sm:p-6 bg-white/[0.02] backdrop-blur-xl rounded-xl sm:rounded-2xl border border-white/10 hover:bg-white/[0.04] hover:border-white/20 transition-all duration-300 group"
+    >
+      <div
+        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}
+      >
+        <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+      </div>
+
+      <h3 className="text-sm sm:text-lg font-bold text-white mb-1 sm:mb-2">
+        {feature.title}
+      </h3>
+
+      <p className="text-xs sm:text-sm text-gray-400">
+        {feature.desc}
+      </p>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );

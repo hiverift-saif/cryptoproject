@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, MessageSquare, ChevronDown, X, Search, Check, User } from "lucide-react";
+import { Menu, MessageSquare, ChevronDown, X, Search, Check } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import { Link } from "react-router-dom";
 
-// --- Comprehensive Language Data ---
 const allLanguages = [
   { name: "English", code: "en", flag: "gb" },
   { name: "Hindi (हिन्दी)", code: "hi", flag: "in" },
@@ -28,14 +27,13 @@ const allLanguages = [
 const Navbar = ({ onOpenAuth }) => {
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLang, setSelectedLang] = useState(allLanguages[0]); 
+  const [selectedLang, setSelectedLang] = useState(allLanguages[0]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("signup");
 
-  // Refs for both Mobile and Desktop dropdowns
   const desktopDropdownRef = useRef(null);
-  const mobileDropdownRef = useRef(null);
 
-  // --- 1. Google Translate Logic ---
+  // --- Google Translate Logic ---
   useEffect(() => {
     if (!document.querySelector("#google-translate-script")) {
       const script = document.createElement("script");
@@ -48,19 +46,18 @@ const Navbar = ({ onOpenAuth }) => {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: "en",
-            includedLanguages: allLanguages.map(l => l.code).join(','),
+            includedLanguages: allLanguages.map((l) => l.code).join(","),
             autoDisplay: false,
           },
           "google_translate_element"
         );
       };
     }
-    
     const currentCookie = getCookie("googtrans");
-    if(currentCookie) {
-        const langCode = currentCookie.split("/")[2];
-        const foundLang = allLanguages.find(l => l.code === langCode);
-        if(foundLang) setSelectedLang(foundLang);
+    if (currentCookie) {
+      const langCode = currentCookie.split("/")[2];
+      const foundLang = allLanguages.find((l) => l.code === langCode);
+      if (foundLang) setSelectedLang(foundLang);
     }
   }, []);
 
@@ -79,14 +76,9 @@ const Navbar = ({ onOpenAuth }) => {
     window.location.reload();
   };
 
-  // --- Click Outside Handler (Fixed for Mobile & Desktop) ---
   useEffect(() => {
     const handler = (e) => {
-      // Check if click is OUTSIDE both desktop AND mobile refs
-      const outsideDesktop = desktopDropdownRef.current && !desktopDropdownRef.current.contains(e.target);
-      const outsideMobile = mobileDropdownRef.current && !mobileDropdownRef.current.contains(e.target);
-
-      if (isLangOpen && outsideDesktop && outsideMobile) {
+      if (isLangOpen && desktopDropdownRef.current && !desktopDropdownRef.current.contains(e.target)) {
         setIsLangOpen(false);
       }
     };
@@ -94,15 +86,12 @@ const Navbar = ({ onOpenAuth }) => {
     return () => document.removeEventListener("mousedown", handler);
   }, [isLangOpen]);
 
-  const filteredLanguages = allLanguages.filter(lang => 
+  const filteredLanguages = allLanguages.filter((lang) =>
     lang.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // --- Shared Dropdown Component ---
   const DropdownContent = () => (
     <div className="absolute top-full left-0 mt-3 w-[280px] bg-black rounded-xl shadow-2xl border border-gray-800 overflow-hidden animate-in fade-in zoom-in-95 duration-200 origin-top-left z-50">
-      
-      {/* Search Header */}
       <div className="p-3 border-b border-gray-800 bg-black">
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
@@ -116,7 +105,6 @@ const Navbar = ({ onOpenAuth }) => {
           />
         </div>
       </div>
-
       <div className="max-h-[300px] overflow-y-auto custom-scrollbar bg-black">
         {filteredLanguages.length > 0 ? (
           filteredLanguages.map((lang) => (
@@ -128,18 +116,16 @@ const Navbar = ({ onOpenAuth }) => {
               onClick={() => handleLanguageChange(lang)}
             >
               <div className="flex items-center gap-3">
-                <img 
-                  src={`https://flagcdn.com/w40/${lang.flag}.png`} 
-                  className="w-5 h-3.5 object-cover rounded-[2px] shadow-sm" 
-                  alt={lang.name} 
+                <img
+                  src={`https://flagcdn.com/w40/${lang.flag}.png`}
+                  className="w-5 h-3.5 object-cover rounded-[2px] shadow-sm"
+                  alt={lang.name}
                 />
                 <span className={`text-sm ${selectedLang.code === lang.code ? "text-[#3F8CFF] font-medium" : "text-gray-300 group-hover:text-white"}`}>
                   {lang.name}
                 </span>
               </div>
-              {selectedLang.code === lang.code && (
-                <Check size={16} className="text-[#3F8CFF]" />
-              )}
+              {selectedLang.code === lang.code && <Check size={16} className="text-[#3F8CFF]" />}
             </button>
           ))
         ) : (
@@ -151,74 +137,82 @@ const Navbar = ({ onOpenAuth }) => {
 
   return (
     <div className="sticky top-0 w-full h-[60px] bg-black flex items-center px-3 md:px-6 shadow-md border-b border-[#242d44] z-50">
-      
-      <div id="google_translate_element" style={{ display: 'none' }}></div>
+      <div id="google_translate_element" style={{ display: "none" }}></div>
 
-      {/* --- MOBILE LEFT --- */}
-      <div className="flex items-center gap-3 z-20 md:hidden">
+      {/* --- LEFT SECTION (Menu + Logo on Mobile | Menu + Lang + Chat on Desktop) --- */}
+      <div className="flex items-center gap-4 z-20">
         <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={26} className="text-white" /> : <Menu size={26} className="text-white" />}
         </button>
 
-        {/* MOBILE DROPDOWN CONTAINER */}
-        <div className="relative" ref={mobileDropdownRef}>
-            <button onClick={() => setIsLangOpen(!isLangOpen)} className="flex items-center gap-2 px-1">
-            <img 
-                src={`https://flagcdn.com/w40/${selectedLang.flag}.png`} 
-                className="w-6 h-4 object-cover rounded-[2px]" 
-                alt="flag" 
-            />
-            <ChevronDown size={14} className={`text-gray-300 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
+        {/* MOBILE LOGO: Only visible on mobile, positioned next to menu */}
+        <div className="md:hidden">
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>
+            <span className="text-white text-lg font-semibold notranslate font-nunito-custom">
+              Max Trading
+            </span>
+          </Link>
+        </div>
+
+        {/* DESKTOP EXTRAS: Language & Chat (Hidden on Mobile) */}
+        <div className="hidden md:flex items-center gap-6">
+          <div className="relative" ref={desktopDropdownRef}>
+            <button
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              className="flex items-center gap-2 hover:bg-white/5 px-2 py-1 rounded transition-colors"
+            >
+              <img
+                src={`https://flagcdn.com/w40/${selectedLang.flag}.png`}
+                className="w-6 h-4 object-cover rounded-[2px]"
+                alt="flag"
+              />
+              <ChevronDown size={14} className={`text-gray-300 transition-transform ${isLangOpen ? "rotate-180" : ""}`} />
             </button>
             {isLangOpen && <DropdownContent />}
+          </div>
+          <div className="flex items-center gap-2 text-[#3F8CFF]">
+            <MessageSquare size={22} />
+          </div>
         </div>
       </div>
 
-      {/* --- CENTER LOGO --- */}
-      <div className="absolute left-1/2 -translate-x-1/2">
-        {/* FIX: onClick event added here to close menu */}
-        <Link to="/" onClick={() => setIsMenuOpen(false)}>
-          <span className="text-white text-lg md:text-xl font-semibold notranslate font-nunito-custom">
+      {/* --- CENTER SECTION (Logo only on Desktop) --- */}
+      <div className="absolute left-1/2 -translate-x-1/2 hidden md:block">
+        <Link to="/">
+          <span className="text-white text-xl font-semibold notranslate font-nunito-custom">
             Max Trading
           </span>
         </Link>
       </div>
 
-      {/* --- MOBILE RIGHT CHAT --- */}
-      <div className="absolute right-3 flex md:hidden">
-        <MessageSquare size={22} className="text-[#3F8CFF]" />
-      </div>
-
-      {/* --- DESKTOP LEFT --- */}
-      <div className="hidden md:flex items-center gap-6 z-20">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X size={26} className="text-white" /> : <Menu size={26} className="text-white" />}
+      {/* --- RIGHT SECTION (Mobile Buttons) --- */}
+      <div className="ml-auto flex items-center gap-2 z-20 md:hidden">
+        <button
+          onClick={() => { setActiveTab("signup"); onOpenAuth && onOpenAuth(); }}
+          className={`py-1.5 px-2.5 text-[11px] font-medium rounded-lg transition-all flex items-center gap-1 ${
+            activeTab === "signup"
+              ? "bg-white text-purple-900 shadow-md"
+              : "bg-transparent text-gray-400 border border-gray-700"
+          }`}
+        >
+           Sign Up
         </button>
 
-        {/* DESKTOP DROPDOWN CONTAINER */}
-        <div className="relative" ref={desktopDropdownRef}>
-          <button 
-            onClick={() => setIsLangOpen(!isLangOpen)} 
-            className="flex items-center gap-2 hover:bg-white/5 px-2 py-1 rounded transition-colors"
-          >
-            <img 
-              src={`https://flagcdn.com/w40/${selectedLang.flag}.png`} 
-              className="w-6 h-4 object-cover rounded-[2px]" 
-              alt="flag" 
-            />
-            <ChevronDown size={14} className={`text-gray-300 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
-          </button>
-          {isLangOpen && <DropdownContent />}
-        </div>
-
-        <div className="flex items-center gap-2 text-[#3F8CFF]">
-          <MessageSquare size={22} />
-        </div>
+        <button
+          onClick={() => { setActiveTab("login"); onOpenAuth && onOpenAuth(); }}
+          className={`py-1.5 px-2.5 text-[11px] font-medium rounded-lg transition-all flex items-center gap-1 ${
+            activeTab === "login"
+              ? "bg-[#2d1f4a] text-white border border-purple-500"
+              : "bg-transparent text-gray-400 border border-gray-700"
+          }`}
+        >
+          Log In
+        </button>
       </div>
 
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
-      <style >{`
+      <style>{`
         body { top: 0px !important; }
         .goog-te-banner-frame, .goog-tooltip { display: none !important; }
         .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }

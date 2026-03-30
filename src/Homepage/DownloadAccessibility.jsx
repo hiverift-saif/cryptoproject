@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Check } from "lucide-react";
+import { Check,Target ,Trophy ,Globe  } from "lucide-react";
 
 const platformsData = [
   {
@@ -143,49 +143,108 @@ export default function DownloadAccessibility() {
 
         {/* ====================================================
             BOTTOM SECTION: GRID CARDS (TEXT ONLY & SHORT)
-        ===================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative z-20">
-          
-          {/* CARD 1: RISE HIGHER */}
-          <div
-            className="rounded-2xl p-6 md:p-8 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-center h-full min-h-[160px]"
-            style={gridCardStyle}
-          >
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-3 font-moderustic">
-              Rise Higher
-            </h3>
-            <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
-              Compete daily to climb ranks and dominate the leaderboard.
-            </p>
-          </div>
+{/* ====================================================
+    BOTTOM SECTION: ENHANCED GRID CARDS
+===================================================== */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-20">
+  
+  {/* CARD 1: RISE HIGHER */}
+  <div
+    className="relative overflow-hidden rounded-2xl p-6 md:p-8 border border-white/10 hover:border-[#50fa7b]/30 transition-all duration-300 group flex flex-col justify-center min-h-[180px]"
+    style={gridCardStyle}
+  >
+    {/* Side Decorative Neon Lines */}
+    <div className="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-[#50fa7b] opacity-60 group-hover:h-1/2 transition-all duration-500" />
+    <div className="absolute left-[4px] top-1/3 bottom-1/3 w-[1px] bg-[#50fa7b] opacity-20" />
 
-          {/* CARD 2: GRAB REWARDS */}
-          <div
-            className="rounded-2xl p-6 md:p-8 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-center h-full min-h-[160px]"
-            style={gridCardStyle}
-          >
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-3">
-              Grab Rewards
-            </h3>
-            <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
-              Unlock exclusive bonuses and huge prizes as you progress.
-            </p>
-          </div>
+    <div className="flex items-start gap-5">
+      {/* Icon */}
+      <div className="flex-shrink-0 p-3 rounded-xl bg-white/5 border border-white/10 text-[#50fa7b] group-hover:scale-110 transition-transform">
+        <Target size={28} />
+      </div>
 
-          {/* CARD 3: EARN GLORY */}
-          <div
-            className="rounded-2xl p-6 md:p-8 text-center border border-white/10 hover:-translate-y-2 transition-transform duration-300 flex flex-col justify-center h-full min-h-[160px]"
-            style={gridCardStyle}
-          >
-            <h3 className="text-white font-bold text-xl md:text-2xl mb-3">
-              Earn Glory
-            </h3>
-            <p className="text-slate-400 text-sm md:text-base leading-relaxed font-medium">
-              Gain recognition and showcase your skills to the world.
-            </p>
-          </div>
+      {/* Content */}
+      <div className="space-y-2">
+        <h3 className="text-white font-bold text-xl md:text-2xl font-moderustic tracking-tight">
+          Rise Higher
+        </h3>
+        <ul className="space-y-1.5">
+          <li className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+            <div className="w-1 h-1 rounded-full bg-[#50fa7b]" />
+            Climb daily leaderboards
+          </li>
+          <li className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+            <div className="w-1 h-1 rounded-full bg-[#50fa7b]" />
+            Dominate global rankings
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-        </div>
+  {/* CARD 2: GRAB REWARDS */}
+  <div
+    className="relative overflow-hidden rounded-2xl p-6 md:p-8 border border-white/10 hover:border-[#50fa7b]/30 transition-all duration-300 group flex flex-col justify-center min-h-[180px]"
+    style={gridCardStyle}
+  >
+    <div className="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-[#50fa7b] opacity-60 group-hover:h-1/2 transition-all duration-500" />
+    <div className="absolute left-[4px] top-1/3 bottom-1/3 w-[1px] bg-[#50fa7b] opacity-20" />
+
+    <div className="flex items-start gap-5">
+      <div className="flex-shrink-0 p-3 rounded-xl bg-white/5 border border-white/10 text-[#50fa7b] group-hover:scale-110 transition-transform">
+        <Trophy size={28} />
+      </div>
+
+      <div className="space-y-2">
+        <h3 className="text-white font-bold text-xl md:text-2xl tracking-tight">
+          Grab Rewards
+        </h3>
+        <ul className="space-y-1.5">
+          <li className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+            <div className="w-1 h-1 rounded-full bg-[#50fa7b]" />
+            Unlock exclusive bonuses
+          </li>
+          <li className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+            <div className="w-1 h-1 rounded-full bg-[#50fa7b]" />
+            Win massive cash prizes
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {/* CARD 3: EARN GLORY */}
+  <div
+    className="relative overflow-hidden rounded-2xl p-6 md:p-8 border border-white/10 hover:border-[#50fa7b]/30 transition-all duration-300 group flex flex-col justify-center min-h-[180px]"
+    style={gridCardStyle}
+  >
+    <div className="absolute left-0 top-1/4 bottom-1/4 w-[2px] bg-[#50fa7b] opacity-60 group-hover:h-1/2 transition-all duration-500" />
+    <div className="absolute left-[4px] top-1/3 bottom-1/3 w-[1px] bg-[#50fa7b] opacity-20" />
+
+    <div className="flex items-start gap-5">
+      <div className="flex-shrink-0 p-3 rounded-xl bg-white/5 border border-white/10 text-[#50fa7b] group-hover:scale-110 transition-transform">
+        <Globe size={28} />
+      </div>
+
+      <div className="space-y-2">
+        <h3 className="text-white font-bold text-xl md:text-2xl tracking-tight">
+          Earn Glory
+        </h3>
+        <ul className="space-y-1.5">
+          <li className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+            <div className="w-1 h-1 rounded-full bg-[#50fa7b]" />
+            Global skill recognition
+          </li>
+          <li className="flex items-center gap-2 text-slate-400 text-sm font-medium">
+            <div className="w-1 h-1 rounded-full bg-[#50fa7b]" />
+            Showcase to elite community
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
       </div>
     </section>
   );

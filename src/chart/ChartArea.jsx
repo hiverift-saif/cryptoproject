@@ -88,7 +88,7 @@ const ChartArea = () => {
     }
   }, []);
 
-  useLayoutEffect(() => {
+useLayoutEffect(() => {
     let root = am5.Root.new(chartRef.current);
     rootRef.current = root;
     root.setThemes([am5themes_Animated.new(root), am5themes_Dark.new(root)]);
@@ -96,17 +96,17 @@ const ChartArea = () => {
     const chartMobile = window.innerWidth < 768;
 
     let stockChart = root.container.children.push(am5stock.StockChart.new(root, { 
-      paddingRight: 0, paddingLeft: 0 
+      paddingRight: 0, 
+      paddingLeft: 0,
+      maxZoomFactor: 1 // <--- Fix 1: Ise 1 rakhein taaki default unlimited zoom factor disable ho jaye
     }));
     chartInstanceRef.current = stockChart;
 
-
-    // --- YE WALI LINE YAHAN PASTE KAREIN ---
-stockChart.set("maxZoomFactor", 20);
-
     let mainPanel = stockChart.panels.push(am5stock.StockPanel.new(root, { 
-      wheelY: "zoomX", panX: true, panY: true 
-      
+      wheelY: "zoomX", 
+      panX: true, 
+      panY: true,
+      wheelSensitivity: 0.5 // <--- Fix 2: Zoom speed ko slow karein taaki control bana rahe
     }));
     mainPanelRef.current = mainPanel;
 
@@ -123,9 +123,17 @@ stockChart.set("maxZoomFactor", 20);
 
     let dateAxis = mainPanel.xAxes.push(am5xy.GaplessDateAxis.new(root, {
       baseInterval: { timeUnit: "second", count: 1 },
+      minZoomCount: 25, // <--- Fix 3: Isse zuyada zoom-in nahi hoga (Kam se kam 25 candles screen par rahengi)
+      maxZoomCount: 150, // <--- Fix 4: Isse zuyada zoom-out nahi hoga (Chart bohot chhota nahi dikhega)
       renderer: am5xy.AxisRendererX.new(root, { minGridDistance: chartMobile ? 40 : 70 })
     }));
     dateAxisRef.current = dateAxis;
+
+    // Isse candles ki width ek limit mein rahegi
+    dateAxis.get("renderer").labels.template.setAll({
+      minPosition: 0.01,
+      maxPosition: 0.99
+    });
 
     let valueSeries = mainPanel.series.push(am5xy.CandlestickSeries.new(root, {
       name: currentAsset, valueXField: "Date", valueYField: "Close", highValueYField: "High", lowValueYField: "Low", openValueYField: "Open",

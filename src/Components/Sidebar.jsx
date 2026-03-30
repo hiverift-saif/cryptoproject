@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // 1. Import useNavigate
-
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-   const navigate = useNavigate(); // 2. Hook Initialize kiya
+  const navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState("signup");
   
@@ -35,24 +34,12 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed right-0 top-0 h-full w-80 bg-[#120025] text-white shadow-2xl z-50 flex flex-col font-sans">
+    /* FIXED: top-0 aur z-[60] taaki Navbar ke upar overlap kare */
+    <div className="fixed right-0 top-0 h-full w-80 bg-[#120025] text-white shadow-2xl z-[60] flex flex-col font-sans border-l border-white/5">
       
       {/* Header with Tab Buttons */}
       <div className="p-6 pb-4 bg-[#120025] z-10">
         <div className="flex gap-3">
-          <button
-            onClick={() => setActiveTab("login")}
-            className={`flex-1 py-2.5 px-4 text-sm font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
-              activeTab === "login"
-                ? "bg-[#2d1f4a] text-white border border-purple-500"
-                : "bg-transparent text-gray-400 hover:text-white border border-gray-700"
-            }`}
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
-            </svg>
-            Log In
-          </button>
           <button
             onClick={() => setActiveTab("signup")}
             className={`flex-1 py-2.5 px-4 text-sm font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
@@ -66,6 +53,20 @@ const Sidebar = () => {
             </svg>
             Sign Up
           </button>
+
+          <button
+            onClick={() => setActiveTab("login")}
+            className={`flex-1 py-2.5 px-4 text-sm font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
+              activeTab === "login"
+                ? "bg-[#2d1f4a] text-white border border-purple-500"
+                : "bg-transparent text-gray-400 hover:text-white border border-gray-700"
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+            </svg>
+            Log In
+          </button>
         </div>
       </div>
 
@@ -78,10 +79,9 @@ const Sidebar = () => {
         >
 
           {/* LOGIN FORM */}
-          <div className="w-1/2 h-full px-6 overflow-y-auto pb-10">
+          <div className="w-1/2 h-full px-6 overflow-y-auto pb-10 custom-scrollbar">
             <h2 className="text-2xl font-bold mb-6 mt-2">Login to your account</h2>
 
-            {/* Email */}
             <div className="mb-4">
               <input
                 type="email"
@@ -93,7 +93,6 @@ const Sidebar = () => {
               {loginSubmitted && !loginEmail && <p className="text-red-500 text-xs mt-1">This field is required</p>}
             </div>
 
-            {/* Password */}
             <div className="mb-4">
               <input
                 type="password"
@@ -105,7 +104,6 @@ const Sidebar = () => {
               {loginSubmitted && !loginPassword && <p className="text-red-500 text-xs mt-1">This field is required</p>}
             </div>
 
-            {/* Stay Logged & Forgot Password */}
             <div className="flex items-center justify-between mb-6 text-sm">
               <label className="flex items-center gap-2 cursor-pointer text-gray-300 hover:text-white">
                 <input 
@@ -119,7 +117,6 @@ const Sidebar = () => {
               <a href="#" className="text-orange-400 hover:text-orange-300 transition-colors">Forgot password?</a>
             </div>
 
-            {/* Login Button */}
             <button 
               onClick={handleLoginSubmit}
               className="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-purple-900 font-bold rounded-lg transition-all active:scale-[0.98]"
@@ -127,14 +124,12 @@ const Sidebar = () => {
               Log In
             </button>
 
-            {/* Divider */}
             <div className="flex items-center gap-3 my-6">
               <div className="h-px bg-gray-700 flex-1"></div>
               <span className="text-gray-500 text-sm">or</span>
               <div className="h-px bg-gray-700 flex-1"></div>
             </div>
 
-            {/* Google Button */}
             <button className="w-full py-3 bg-white text-black font-medium rounded-lg flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors text-sm">
               <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-5 h-5" alt="Google" />
               Continue with Google
@@ -142,10 +137,9 @@ const Sidebar = () => {
           </div>
 
           {/* SIGN UP FORM */}
-          <div className="w-1/2 h-full px-6 overflow-y-auto pb-10">
+          <div className="w-1/2 h-full px-6 overflow-y-auto pb-10 custom-scrollbar">
             <h2 className="text-2xl font-bold mb-6 mt-2">Open an account</h2>
 
-            {/* Email */}
             <div className="mb-4">
               <input
                 type="email"
@@ -157,7 +151,6 @@ const Sidebar = () => {
               {signupSubmitted && !signupEmail && <p className="text-red-500 text-xs mt-1">This field is required</p>}
             </div>
 
-            {/* Password */}
             <div className="mb-4">
               <input
                 type="password"
@@ -169,7 +162,6 @@ const Sidebar = () => {
               {signupSubmitted && !signupPassword && <p className="text-red-500 text-xs mt-1">This field is required</p>}
             </div>
 
-            {/* Currency */}
             <div className="mb-4">
               <select 
                 value={currency}
@@ -182,7 +174,6 @@ const Sidebar = () => {
               </select>
             </div>
 
-            {/* Terms */}
             <div className="mb-6">
               <label className="flex items-start gap-3 cursor-pointer group">
                 <div className="relative flex items-center">
@@ -203,29 +194,24 @@ const Sidebar = () => {
               {signupSubmitted && !acceptTerms && <p className="text-red-500 text-xs mt-1">This field is required</p>}
             </div>
 
-            {/* Sign Up Button */}
             <button 
-            
               onClick={handleSignupSubmit}
               className="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-purple-900 font-bold rounded-lg transition-all active:scale-[0.98]"
             >
               Sign Up
             </button>
 
-            {/* Divider */}
             <div className="flex items-center gap-3 my-6">
               <div className="h-px bg-gray-700 flex-1"></div>
               <span className="text-gray-500 text-sm">or</span>
               <div className="h-px bg-gray-700 flex-1"></div>
             </div>
 
-            {/* Google Button */}
             <button className="w-full py-3 bg-white text-black font-medium rounded-lg flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors text-sm">
               <img src="https://www.svgrepo.com/show/355037/google.svg" className="w-5 h-5" alt="Google" />
               Continue with Google
             </button>
           </div>
-
         </div>
       </div>
     </div>
@@ -233,6 +219,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-
-

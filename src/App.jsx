@@ -45,75 +45,74 @@ import RefundPolicy from "./Aboutus/RefundPolicy";
 function MainLayout() {
   const location = useLocation();
 
-  // Logic to determine layout visibility
   const isHomePage = location.pathname === "/";
   const isTradingPage = location.pathname.toLowerCase().startsWith("/trading");
 
   return (
-    <div className="flex h-screen w-full bg-[#1b1817] text-white overflow-hidden">
+    <div className="flex flex-col min-h-screen w-full bg-[#1b1817] text-white overflow-x-hidden">
       
-      {/* --- MAIN CONTENT AREA --- */}
-      <div className="flex-1 flex flex-col h-full relative">
-        
-        {/* 1. Navbar: Sirf tab dikhega jab trading page NA HO */}
-        {!isTradingPage && (
-          <div className="flex-shrink-0 z-40 relative">
-            <Navbar />
-          </div>
-        )}
-
-        {/* 2. Routes Container */}
-        <div className={`flex-1 relative overflow-y-auto ${isTradingPage ? 'bg-[#1b1817]' : 'bg-black'}`}>
-          <Routes>
-            {/* Main Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/trading" element={<TradingDashboard />} />
-            
-            {/* Auth Routes */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-
-            {/* Features & Read More */}
-            <Route path="/learning-tools" element={<IntegratedLearningTools />} />
-            <Route path="/platform-designed" element={<PlatformDesigned />} />
-            <Route path="/seamless-trading" element={<SeamlessTrading />} />
-            <Route path="/smart-account" element={<SmartAccount />} />
-            <Route path="/freedemo" element={<Freedemo />} />
-            <Route path="/quickstart" element={<Quickstart/>} />
-            <Route path="/education" element={<Education/>} /> 
-
-            {/* Why Max */}
-            <Route path="/tradinginstruments" element={<Tradinginstruments/>} />
-            <Route path="/promobonuses" element={<PromoBonuses/>} />
-            <Route path="/socialtrading" element={<SocialTrading />} />
-
-            {/* About & Legal */}
-            <Route path="/aboutthecompany" element={<AbouttheCompany />} />
-            <Route path="/maxtradingblog" element={<MaxtradingBlog />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/supportservice" element={<SupportService />} />
-            <Route path="/termsandconditions" element={<TermsConditions />} />
-            <Route path="/amlkycpolicy" element={<AMLKYCpolicy />} />
-            <Route path="/privacypolicy" element={<Privacypolicy />} />
-            <Route path="/paymentpolicy" element={<Paymentpolicy />} />
-            <Route path="/informationdisclosure" element={<Informationdisclosure />} />
-            <Route path="/riskstatement" element={<RiskStatement />} />
-            <Route path="/refundpolicy" element={<RefundPolicy />} />
-          </Routes>
-
-          {/* 3. Footer: Sirf tab dikhega jab trading page NA HO */}
-          {!isTradingPage && <Footer />}
-        </div>
-      </div>
-
-      {/* --- RIGHT SIDEBAR: Sirf Home page par dikhega --- */}
-      {isHomePage && (
-        <div className="hidden lg:flex w-80 h-full flex-shrink-0 z-50 border-l border-gray-800">
-          <Sidebar />
+      {/* 1. FIXED NAVBAR: Pure width par alignment fix karne ke liye */}
+      {!isTradingPage && (
+        <div className="fixed top-0 left-0 w-full z-50 h-[60px]">
+          <Navbar />
         </div>
       )}
 
+      {/* --- CONTENT WRAPPER --- */}
+      {/* pt-[60px] taaki content navbar ke niche se start ho */}
+      <div className={`flex flex-1 ${!isTradingPage ? 'pt-[60px]' : ''}`}>
+        
+        {/* 2. MAIN SCROLLABLE AREA */}
+        {/* xl:mr-80 ensures content doesn't hide behind fixed sidebar */}
+        <main className={`flex-1 flex flex-col min-w-0 bg-black relative ${isHomePage ? 'xl:mr-80' : ''}`}>
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/trading" element={<TradingDashboard />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/learning-tools" element={<IntegratedLearningTools />} />
+              <Route path="/platform-designed" element={<PlatformDesigned />} />
+              <Route path="/seamless-trading" element={<SeamlessTrading />} />
+              <Route path="/smart-account" element={<SmartAccount />} />
+              <Route path="/freedemo" element={<Freedemo />} />
+              <Route path="/quickstart" element={<Quickstart />} />
+              <Route path="/education" element={<Education />} />
+              <Route path="/tradinginstruments" element={<Tradinginstruments />} />
+              <Route path="/promobonuses" element={<PromoBonuses />} />
+              <Route path="/socialtrading" element={<SocialTrading />} />
+              <Route path="/aboutthecompany" element={<AbouttheCompany />} />
+              <Route path="/maxtradingblog" element={<MaxtradingBlog />} />
+              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/supportservice" element={<SupportService />} />
+              <Route path="/termsandconditions" element={<TermsConditions />} />
+              <Route path="/amlkycpolicy" element={<AMLKYCpolicy />} />
+              <Route path="/privacypolicy" element={<Privacypolicy />} />
+              <Route path="/paymentpolicy" element={<Paymentpolicy />} />
+              <Route path="/informationdisclosure" element={<Informationdisclosure />} />
+              <Route path="/riskstatement" element={<RiskStatement />} />
+              <Route path="/refundpolicy" element={<RefundPolicy />} />
+            </Routes>
+          </div>
+
+          {!isTradingPage && <Footer />}
+        </main>
+
+        {/* 3. SIDEBAR: Fixed at top-[60px] */}
+        {isHomePage && (
+          <aside className="hidden xl:block">
+            <Sidebar />
+          </aside>
+        )}
+
+      </div>
+      
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+      `}</style>
     </div>
   );
 }

@@ -1,227 +1,150 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  Instagram,
-  Twitter,
-  Facebook,
-  Linkedin,
-  Mail,
+  MessageCircle,
   Phone,
-  Shield,
-  TrendingUp,
-  Award,
-  Users,
-  BarChart3,
+  Send,
+  Mail,
+  Instagram,
+  Youtube,
+  Facebook,
+  ChevronDown,
+  Apple,
+  Play,
+  Smartphone,
 } from "lucide-react";
 
 const Footer = () => {
-  const footerLinks = {
-    aboutUs: [
-      { label: "Terms and conditions", href: "/TermsandConditions" },
-      { label: "Confidentiality Policy", href: "/Privacypolicy" },
-      { label: "Bonus rules", href: "/PromoBonuses" },
-      { label: "Risk statement", href: "/RiskStatement" },
-      { label: "AML Policy", href: "/AMLKYCpolicy" },
-      { label: "Refund Policy", href: "/RefundPolicy" },
-      { label: "Blog", href: "/MaxtradingBlog" },
-    ],
-    accountTypes: [
-      { label: "FAQ", href: "/" },
-      { label: "Account types", href: "/" },
-      { label: "Trading Platform", href: "/", icon: TrendingUp }, // New trading link
-    ],
-    advantages: [
-      { label: "Contest", href: "/" },
-      { label: "Giveaways", href: "/" },
-      { label: "Referrals", href: "/" },
-    ],
-  };
-
-  const socialLinks = [
-    { icon: Instagram, href: "https://www.instagram.com/iqcentcom/", label: "Instagram" },
-    { icon: Twitter, href: "https://twitter.com/iqcentcom", label: "Twitter" },
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-  ];
-
-  const stats = [
-    { icon: Users, value: "2M+", label: "Active Traders" },
-    { icon: Award, value: "12+", label: "Years Experience" },
-    { icon: BarChart3, value: "50M+", label: "Trades Daily" },
-  ];
+  const [language, setLanguage] = useState("English");
 
   return (
-    <footer className="relative bg-black text-white overflow-hidden">
+    <footer className="bg-[#0a1929] text-gray-400 pt-12 pb-6">
+      <div className="container mx-auto px-4 max-w-7xl">
+        {/* ===== Main Footer Grid ===== */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
 
-      <div className="relative max-w-7xl mx-auto px-4 md:px-8">
-        
-        {/* Stats Section */}
-        <div className="py-8 border-b border-white/10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div 
-                  key={index}
-                  className="flex items-center justify-center md:justify-start gap-4 p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105"
-                >
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#ffae34] to-orange-600 flex items-center justify-center">
-                    <Icon size={24} className="text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-[#ffae34]">{stat.value}</div>
-                    <div className="text-sm text-white/60">{stat.label}</div>
-                  </div>
-                </div>
-              );
-            })}
+          {/* ===== Platform ===== */}
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-4">Platform</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="hover:text-white">About Platform</a></li>
+              <li><a href="#" className="hover:text-white">Legal Information</a></li>
+              <li><a href="#" className="hover:text-white">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-white">Terms & Conditions</a></li>
+            </ul>
+          </div>
+
+          {/* ===== Resources ===== */}
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-4">Resources</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="hover:text-white">Help Center</a></li>
+              <li><a href="#" className="hover:text-white">Trading Guide</a></li>
+              <li><a href="#" className="hover:text-white">Market Insights</a></li>
+              <li><a href="#" className="hover:text-white">Economic Events</a></li>
+              <li><a href="#" className="hover:text-white">Available Assets</a></li>
+            </ul>
+          </div>
+
+          {/* ===== Support ===== */}
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-4">Support</h3>
+            <div className="space-y-3">
+              <button className="w-full bg-white text-[#0a1929] px-6 py-3 rounded-lg font-medium flex items-center gap-3">
+                <MessageCircle size={20} /> Live Chat
+              </button>
+              <button className="w-full bg-white text-[#0a1929] px-6 py-3 rounded-lg font-medium flex items-center gap-3">
+                <Phone size={20} /> Request Call
+              </button>
+              <button className="w-full bg-white text-[#0a1929] px-6 py-3 rounded-lg font-medium flex items-center gap-3">
+                <Send size={20} /> Telegram Support
+              </button>
+              <button className="w-full bg-white text-[#0a1929] px-6 py-3 rounded-lg font-medium flex items-center gap-3">
+                <Mail size={20} /> Email Support
+              </button>
+            </div>
+          </div>
+
+          {/* ===== Social & Apps ===== */}
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-4">Community</h3>
+            <div className="flex gap-3 mb-6">
+              <a className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                <Instagram className="text-[#0a1929]" />
+              </a>
+              <a className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                <Send className="text-[#0a1929]" />
+              </a>
+              <a className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                <Facebook className="text-[#0a1929]" />
+              </a>
+              <a className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                <Youtube className="text-[#0a1929]" />
+              </a>
+            </div>
+
+            <h4 className="text-white font-semibold text-lg mb-3">Mobile App</h4>
+            <div className="flex gap-3">
+              <a className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                <Apple className="text-black" />
+              </a>
+              <a className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                <Play className="text-black" />
+              </a>
+              <a className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                <Smartphone className="text-black" />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 py-12 md:py-16">
-          
-          {/* Column 1 - Brand */}
-          <div className="lg:col-span-1">
-            <div className="mb-6">
+        {/* ===== Bottom Section ===== */}
+        <div className="border-t border-gray-700 pt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+
+            {/* Language & Address */}
+            <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#ffae34] to-orange-600 flex items-center justify-center">
-                  <TrendingUp size={24} className="text-white" />
-                </div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-[#ffae34] to-orange-500 bg-clip-text text-transparent">
-                  ExpertOption
-                </h1>
+                <span className="text-2xl">🌐</span>
+                <button className="flex items-center gap-2 text-white">
+                  Language: {language}
+                  <ChevronDown size={16} />
+                </button>
               </div>
-              <p className="text-white/60 text-sm leading-relaxed">
-                Professional trading platform with 12 years of experience launching
-                successful trading careers worldwide.
+
+              <div className="text-sm space-y-1">
+                <p className="text-white font-medium">Global Trading Group Ltd.</p>
+                <p>Registration No: 2025-XG-918</p>
+                <p className="mt-3">Business Center Tower</p>
+                <p>Financial District</p>
+                <p>International Zone</p>
+              </div>
+            </div>
+
+            {/* Risk Disclaimer */}
+            <div className="lg:col-span-2">
+              <p className="text-sm leading-relaxed mb-4">
+                <span className="text-white font-semibold">Risk Warning:</span>{" "}
+                Trading digital and financial instruments involves substantial
+                risk and may result in loss of invested capital. This platform
+                is intended for educational and informational purposes only.
+                Please ensure you fully understand the risks before trading.
+              </p>
+
+              <p className="text-sm">
+                Support:
+                <a href="mailto:support@yourplatform.com" className="text-white ml-1 hover:underline">
+                  support@yourplatform.com
+                </a>
+                {" | "}
+                <a href="tel:+1234567890" className="text-white hover:underline">
+                  +1 234 567 890
+                </a>
               </p>
             </div>
-
-            <div className="space-y-3">
-              <a
-                href="mailto:support@iqcent.com"
-                className="flex items-center gap-3 text-white/60 hover:text-[#ffae34] transition-all text-sm group p-2 rounded-lg hover:bg-white/5"
-              >
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#ffae34]/20 transition-all">
-                  <Mail size={16} className="group-hover:scale-110 transition-transform" />
-                </div>
-                <span>support@iqcent.com</span>
-              </a>
-
-              <a
-                href="tel:+1234567890"
-                className="flex items-center gap-3 text-white/60 hover:text-[#ffae34] transition-all text-sm group p-2 rounded-lg hover:bg-white/5"
-              >
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#ffae34]/20 transition-all">
-                  <Phone size={16} className="group-hover:scale-110 transition-transform" />
-                </div>
-                <span>+1 (234) 567-890</span>
-              </a>
-            </div>
           </div>
 
-          {/* Column 2 - About Us */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
-              <Shield size={20} className="text-[#ffae34]" />
-              About Us
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.aboutUs.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-white/70 hover:text-[#ffae34] transition-all text-sm hover:translate-x-2 inline-block duration-200 relative group"
-                  >
-                    <span className="relative">
-                      {link.label}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffae34] group-hover:w-full transition-all duration-300"></span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3 - Account Types */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">
-              Account Types
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.accountTypes.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-white/70 hover:text-[#ffae34] transition-all text-sm hover:translate-x-2 inline-flex items-center gap-2 duration-200 relative group"
-                  >
-                    {link.icon && <link.icon size={16} className="text-[#ffae34]" />}
-                    <span className="relative">
-                      {link.label}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffae34] group-hover:w-full transition-all duration-300"></span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4 - Advantages */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">
-              Advantages
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.advantages.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-white/70 hover:text-[#ffae34] transition-all text-sm hover:translate-x-2 inline-block duration-200 relative group"
-                  >
-                    <span className="relative">
-                      {link.label}
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#ffae34] group-hover:w-full transition-all duration-300"></span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-
-        {/* Divider with gradient */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8"></div>
-
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8">
-          <div className="text-white/50 text-sm text-center md:text-left">
-            <p className="font-semibold text-white/70">© 2025 Wave Makers LTD</p>
-            <p className="text-xs mt-1 max-w-md">
-              Registration number: 103581, Trust Company Complex, Ajeltake Road,
-              Ajeltake Island, Majuro, Marshall Islands MH96960
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {socialLinks.map((social, index) => {
-              const Icon = social.icon;
-              return (
-                <a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="group w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-gradient-to-br hover:from-[#ffae34] hover:to-orange-600 border border-white/10 rounded-full transition-all duration-300 hover:scale-110 hover:rotate-6"
-                >
-                  <Icon
-                    size={18}
-                    className="text-white/70 group-hover:text-white transition-colors"
-                  />
-                </a>
-              );
-            })}
+          <div className="text-sm text-center lg:text-left">
+            © 2022–2025 YourPlatform. All rights reserved.
           </div>
         </div>
       </div>
